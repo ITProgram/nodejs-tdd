@@ -1,0 +1,32 @@
+{
+  "name": "TDD",
+  "version": "1.0.0",
+  "description": "Tdd",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "jest"
+  },
+
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "babel-jest": "^19.0.0",
+    "babel-preset-es2017": "^6.24.1",
+    "jest": "^19.0.2"
+  },
+  "dependencies": {
+    "bluebird": "^3.5.0",
+    "body-parser": "^1.17.2",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.15.3",
+    "lodash": "^4.17.4",
+    "mysql": "^2.13.0",
+    "pg": "^6.2.3",
+    "sequelize": "^3.30.4",
+    "pg-hstore": "^2.3.2"
+  },
+  "jest": {
+    "verbose": true,
+    "testEnvironment": "node"
+  }
+}

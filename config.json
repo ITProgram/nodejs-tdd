@@ -1,0 +1,14 @@
+{
+  "db": {
+    "host": "127.0.0.1",
+    "name": "TDD",
+    "user": "root",
+    "password": "",
+    "dialect": "mysql"
+  },
+  "env": "dev",
+  "cookie": {
+    "key": "secret key",
+    "auth": "__user_id"
+  }
+}
