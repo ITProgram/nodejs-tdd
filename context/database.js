@@ -36,7 +36,7 @@ class DatabaseContext {
 
 
     static _setDbConfig(Sequelize) {
-        return process.env.NODE_ENV === 'PROD' ?
+        return (process.env.NODE_ENV === 'PROD' || process.env.NODE_ENV === 'production' )?
             //new Sequelize(process.env.DATABASE_URL) :
             new Sequelize(
                 config.db.name,
