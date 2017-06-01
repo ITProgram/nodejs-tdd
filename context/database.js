@@ -4,6 +4,26 @@ const Team = require('../models/team');
 const Worker = require('../models/worker');
 const Contacts = require('../models/contacts');
 
+const optionsProduction = {
+    host: config.db.host,
+    dialect: config.db.dialect,
+    dialectOptions: {ssl: true}
+};
+const optionsLocal = {
+    host: config.dbl.host,
+    dialect: 'mysql',
+    logging: false,
+    define: {
+        timestamps: true,
+        paranoid: true,
+        defaultScope: {
+            where: {
+                deletedAt: {$eq: null}
+            }
+        }
+    }
+};
+
 class DatabaseContext {
 
     constructor(Sequelize) {
@@ -17,12 +37,20 @@ class DatabaseContext {
 
     static _setDbConfig(Sequelize) {
         return process.env.NODE_ENV === 'PROD' ?
-            new Sequelize(process.env.DATABASE_URL) :
+            //new Sequelize(process.env.DATABASE_URL) :
             new Sequelize(
                 config.db.name,
                 config.db.user,
                 config.db.password,
-                DatabaseContext._getSequelizeOptions(config));
+                optionsProduction
+            ) :
+            new Sequelize(
+                config.dbl.name,
+                config.dbl.user,
+                config.dbl.password,
+                optionsLocal
+                //DatabaseContext._getSequelizeOptions(config)
+            );
     }
 
 
