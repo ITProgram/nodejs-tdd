@@ -27,7 +27,13 @@ const optionsLocal = {
 class DatabaseContext {
 
     constructor(Sequelize) {
-        this.sequelize = DatabaseContext._setDbConfig(Sequelize);
+        this.sequelize = new Sequelize(
+            config.db.name,
+            config.db.user,
+            config.db.password,
+            optionsProduction
+        ); //DatabaseContext._setDbConfig(Sequelize);
+        //this.sequelize = DatabaseContext._setDbConfig(Sequelize);
         this.team = Team(Sequelize, this.sequelize);
         this.worker = Worker(Sequelize, this.sequelize);
         this.contacts = Contacts(Sequelize, this.sequelize);
@@ -36,21 +42,22 @@ class DatabaseContext {
 
 
     static _setDbConfig(Sequelize) {
-        return (process.env.NODE_ENV === 'PROD' || process.env.NODE_ENV === 'production' )?
-            //new Sequelize(process.env.DATABASE_URL) :
-            new Sequelize(
-                config.db.name,
-                config.db.user,
-                config.db.password,
-                optionsProduction
-            ) :
-            new Sequelize(
-                config.dbl.name,
-                config.dbl.user,
-                config.dbl.password,
-                optionsLocal
-                //DatabaseContext._getSequelizeOptions(config)
-            );
+        return //(process.env.NODE_ENV === 'PROD' || process.env.NODE_ENV === 'production' )?
+        //new Sequelize(process.env.DATABASE_URL) :
+        new Sequelize(
+            config.db.name,
+            config.db.user,
+            config.db.password,
+            optionsProduction
+        );
+        // :
+        //     new Sequelize(
+        //         config.dbl.name,
+        //         config.dbl.user,
+        //         config.dbl.password,
+        //         optionsLocal
+        //         //DatabaseContext._getSequelizeOptions(config)
+        //     );
     }
 
 
